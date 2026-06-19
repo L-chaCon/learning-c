@@ -22,3 +22,4 @@ Exercises from *The C Programming Language* by Kernighan & Ritchie.
 | [17.c](c_book/1/17.c) | 1-17 | Print lines longer than 80 characters |
 | [18.c](c_book/1/18.c) | 1-18 | Remove trailing blanks and tabs |
 | [19.c](c_book/1/19.c) | 1-19 | Reverse each line |
+| [20.c](c_book/1/20.c) | 1-20 | Detab: replace tabs with spaces to the next tab stop |
