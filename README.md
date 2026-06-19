@@ -23,3 +23,4 @@ Exercises from *The C Programming Language* by Kernighan & Ritchie.
 | [18.c](c_book/1/18.c) | 1-18 | Remove trailing blanks and tabs |
 | [19.c](c_book/1/19.c) | 1-19 | Reverse each line |
 | [20.c](c_book/1/20.c) | 1-20 | Detab: replace tabs with spaces to the next tab stop |
+| [21.c](c_book/1/21.c) | 1-21 | Entab: replace spaces with tabs and blanks to achieve the same spacing |
