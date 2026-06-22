@@ -2,6 +2,7 @@
 
 #define MAXLINE 1000
 #define COLUMN_LENGH 10
+#define TABSTOP 4
 
 int getLine(char line[], int max);
 void wrapLine(char from[], char to[], int length);
@@ -42,17 +43,47 @@ void copyStdout(char from[]) {
 }
 
 void wrapLine(char from[], char to[], int len) {
-  int i, j, col;
+  int i, j, col, lastSpace;
   j++;
-  col = j = 0;
+  col = j = lastSpace = 0;
   for (i = 0; i < len; i++) {
-    if (col == COLUMN_LENGH) {
-      to[j] = '\n';
+    if (from[i] == ' ') {
+      if (col == COLUMN_LENGH) {
+        to[j] = '\n';
+        j++;
+        col = 0;
+      } else {
+        to[j] = from[i];
+        j++;
+        lastSpace = i;
+      }
+    } else if (from[i] == '\n') {
+      to[j] = from[i];
       j++;
       col = 0;
+    } else if (from[i] == '\t') {
+      if ((col + TABSTOP) >= COLUMN_LENGH || col == COLUMN_LENGH) {
+        to[j] = '\n';
+        j++;
+        col = 0;
+      } else {
+        int spaces = TABSTOP - (col % TABSTOP);
+        col += spaces;
+        while (spaces > 0) {
+          to[j] = ' ';
+          j++;
+          spaces--;
+        }
+      }
+    } else {
+      if (col == COLUMN_LENGH) {
+        to[j] = '\n';
+        j++;
+        col = 0;
+      }
+      to[j] = from[i];
+      j++;
     }
-    to[j] = from[i];
-    j++;
     col++;
   }
   to[j] = '\0';
