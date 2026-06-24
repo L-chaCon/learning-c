@@ -1,70 +1,40 @@
 #include <stdio.h>
 
-#define MAXLINE 1000 /* maximum input line size */
 #define TABSTOP 4
 
-int getLine(char line[], int max);
-void transformSpace(char to[], char form[], int lineLen);
-void copyStdout(char from[]);
-
 int main() {
-  int len;
-  char line[MAXLINE]; /* current input line */
-  char tline[MAXLINE];
+  int c, col, spaces;
 
-  while ((len = getLine(line, MAXLINE)) > 0) {
-    transformSpace(tline, line, len);
-    copyStdout(tline);
-  }
-  return 0;
-}
-
-int getLine(char s[], int lim) {
-  int c, i;
-  for (i = 0; i < lim - 1 && (c = getchar()) != EOF && c != '\n'; i++) {
-    s[i] = c;
-  }
-  if (c == '\n') {
-    s[i] = c;
-    i++;
-  }
-  s[i] = '\0';
-  return i;
-}
-
-void copyStdout(char from[]) {
-  int i;
-  i = 0;
-  while (from[i] != '\0') {
-    putchar(from[i]);
-    ++i;
-  }
-}
-
-// This has a bug, the problem is for `abcde  f`
-void transformSpace(char to[], char from[], int len) {
-  int spaces, i, j;
-  j = 0;
+  col = 0;
   spaces = 0;
-  for (i = 0; i < len; i++) {
-    if (from[i] == ' ') {
+  while ((c = getchar()) != EOF) {
+    if (c == '\n') {
+      while (spaces > 0) {
+        putchar(' ');
+        spaces--;
+      }
+      putchar(c);
+      col = 0;
+    } else if (c == '\t') {
+      putchar(c);
+      col += TABSTOP - (col % TABSTOP);
+    } else if (c == ' ') {
       spaces++;
-      if (spaces > 1 && (i + 1) % TABSTOP == 0) {
-        to[j] = '\t';
+      ++col;
+      if (spaces > 1 && (col % TABSTOP == 0)) {
+        putchar('\t');
         spaces = 0;
-        ++j;
       }
     } else {
       while (spaces > 0) {
+        putchar(' ');
         spaces--;
-        to[j] = ' ';
-        j++;
       }
-      to[j] = from[i];
-      j++;
+      putchar(c);
+      col++;
     }
   }
-  to[j] = '\0';
+  return 0;
 }
 
 /*
