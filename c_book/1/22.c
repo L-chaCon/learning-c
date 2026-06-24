@@ -44,7 +44,6 @@ void copyStdout(char from[]) {
 
 void wrapLine(char from[], char to[], int len) {
   int i, j, col, lastSpace;
-  j++;
   col = j = lastSpace = 0;
   for (i = 0; i < len; i++) {
     if (from[i] == ' ') {
@@ -54,37 +53,37 @@ void wrapLine(char from[], char to[], int len) {
         col = 0;
       } else {
         to[j] = from[i];
+        lastSpace = j;
         j++;
-        lastSpace = i;
+        col++;
       }
     } else if (from[i] == '\n') {
       to[j] = from[i];
       j++;
       col = 0;
     } else if (from[i] == '\t') {
-      if ((col + TABSTOP) >= COLUMN_LENGH || col == COLUMN_LENGH) {
+      if ((col + TABSTOP) >= COLUMN_LENGH) {
         to[j] = '\n';
         j++;
         col = 0;
       } else {
         int spaces = TABSTOP - (col % TABSTOP);
-        col += spaces;
         while (spaces > 0) {
           to[j] = ' ';
           j++;
           spaces--;
+          col++;
         }
       }
     } else {
       if (col == COLUMN_LENGH) {
-        to[j] = '\n';
-        j++;
-        col = 0;
+        to[lastSpace] = '\n';
+        col = j - lastSpace - 1;
       }
       to[j] = from[i];
       j++;
+      col++;
     }
-    col++;
   }
   to[j] = '\0';
 }
