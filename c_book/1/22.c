@@ -87,3 +87,51 @@ void wrapLine(char from[], char to[], int len) {
   }
   to[j] = '\0';
 }
+
+/*
+#include <stdio.h>
+
+#define MAXCOL  10
+#define MAXWORD 1000
+
+int main(void)
+{
+    int  c, col, wordlen, i;
+    char word[MAXWORD];
+
+    col     = 0;
+    wordlen = 0;
+
+    for (;;) {
+        c = getchar();
+
+        if (c == ' ' || c == '\n' || c == EOF) {
+
+            // word is complete — decide where it goes
+            if (wordlen > 0) {
+                if (col > 0 && col + 1 + wordlen > MAXCOL) {
+                    putchar('\n');
+                    col = 0;
+                }
+                if (col > 0) {
+                    putchar(' ');
+                    col++;
+                }
+                for (i = 0; i < wordlen; i++)
+                    putchar(word[i]);
+                col    += wordlen;
+                wordlen = 0;
+            }
+
+            if (c == '\n') { putchar('\n'); col = 0; }
+            if (c == EOF)  break;
+
+        } else {
+            if (wordlen < MAXWORD - 1)
+                word[wordlen++] = c;
+        }
+    }
+
+    return 0;
+}
+*/
