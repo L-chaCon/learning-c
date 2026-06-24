@@ -21,7 +21,7 @@ int main() {
     } else if (c == ' ') {
       spaces++;
       ++col;
-      if (spaces > 1 && (col % TABSTOP == 0)) {
+      if (col % TABSTOP == 0) {
         putchar('\t');
         spaces = 0;
       }
