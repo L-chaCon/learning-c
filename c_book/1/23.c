@@ -10,8 +10,6 @@ int main() {
   int s, c;
   s = OUT;
   while ((c = getchar()) != EOF) {
-    // start with checking start becasue if I do after is going to enter every
-    // time the character is '/'
     if (s == CHECKING_START) {
       if (c == '/') {
         s = LINE_COMMENT;
@@ -21,25 +19,24 @@ int main() {
         putchar('/');
         s = OUT;
       }
-    }
-    if (s == OUT && c == '/') {
-      s = CHECKING_START;
-    }
-    // Will deside that in case a comment with line is remove a \n will still
-    // stay there, this is for cases like some code like thie `s=0 //comment`
-    if (s == LINE_COMMENT && c == '\n') {
-      s = OUT;
-    }
-    if (s == OUT) {
-      putchar(c);
-    }
-    // This needs to go after the out because I want to insert the character
-    // after the end, not the end one
-    if (s == CHECKING_END && c == '/') {
-      s = OUT;
-    }
-    if (s == MULTY_COMMENT && c == '*') {
-      s = CHECKING_END;
+    } else if (s == OUT) {
+      if (c == '/') {
+        s = CHECKING_START;
+      } else {
+        putchar(c);
+      }
+    } else if (s == LINE_COMMENT) {
+      if (c == '\n') {
+        s = OUT;
+      }
+    } else if (s == CHECKING_END) {
+      if (c == '/') {
+        s = OUT;
+      }
+    } else if (s == MULTY_COMMENT) {
+      if (c == '*') {
+        s = CHECKING_END;
+      }
     }
   }
 }
