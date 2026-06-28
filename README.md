@@ -24,3 +24,6 @@ Exercises from *The C Programming Language* by Kernighan & Ritchie.
 | [19.c](c_book/1/19.c) | 1-19 | Reverse each line |
 | [20.c](c_book/1/20.c) | 1-20 | Detab: replace tabs with spaces to the next tab stop |
 | [21.c](c_book/1/21.c) | 1-21 | Entab: replace spaces with tabs and blanks to achieve the same spacing |
+| [22.c](c_book/1/22.c) | 1-22 | Fold long lines into two or more shorter lines after the last non-blank character before a given column |
+| [23.c](c_book/1/23.c) | 1-23 | Remove comments from a C program |
+| [24.c](c_book/1/24.c) | 1-24 | Detect basic syntax errors: unmatched parentheses, brackets, braces, quotes, and comments |
